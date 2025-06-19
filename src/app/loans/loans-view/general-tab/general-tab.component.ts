@@ -84,20 +84,8 @@ export class GeneralTabComponent implements OnInit {
   /** Calculates the Net Disbursed Amount = Disbursed Amount - Processing Fee (if processing fee is not found, assumes zero.) */
   calculateNetDisbursedAmount() {
     const disbursedAmount = this.loanDetails?.principal || 0;
-    let processingFee = 0;
-
-    if (Array.isArray(this.loanDetails?.charges)) {
-      const processingCharge = this.loanDetails.charges.find(
-        (charge: any) =>
-          (charge.chargeType && charge.chargeType.toLowerCase().includes('processing')) ||
-          (charge.name && charge.name.toLowerCase().includes('processing'))
-      );
-      if (processingCharge && processingCharge.amount) {
-        processingFee = processingCharge.amount;
-      }
-    }
-
-    this.netDisbursedAmount = disbursedAmount - (processingFee || 0);
+    let processingFee = this.loanDetails.summary.feeChargesCharged || 0;
+    this.netDisbursedAmount = disbursedAmount - processingFee;
   }
 
   setloanSummaryTableData() {

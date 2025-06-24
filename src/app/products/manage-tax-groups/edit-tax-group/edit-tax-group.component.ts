@@ -186,6 +186,7 @@ export class EditTaxGroupComponent implements OnInit {
         startDate: taxComponentData.startDate ? new Date(taxComponentData.startDate) : '',
         endDate: taxComponentData.endDate ? new Date(taxComponentData.endDate) : '',
         taxComponentId: taxComponentData.taxComponent.id,
+        taxComponentName: taxComponentData.taxComponent.name,
         isNew: false
       };
       this.taxComponentsDataSource = this.taxComponentsDataSource.concat(chart);

@@ -17,7 +17,7 @@
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Name' | translate }}</th>
-        <td mat-cell *matCellDef="let taxGroups">{{ taxGroups.name }}</td>
+        <td mat-cell *matCellDef="let taxGroups">{{ taxGroups?.name }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

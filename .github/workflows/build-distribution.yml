@@ -2,10 +2,9 @@ name: Build distribution image
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -16,7 +15,7 @@ jobs:
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4
         with:
           fetch-depth: 0
-      
+
       - name: Get the commit message
         id: commit-message
         run: echo "::set-output name=message::$(git log -1 --pretty=format:'%s')"
@@ -37,11 +36,10 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.FRONTEND_REPOSITORY }}
-          
+
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-
 
   notify-slack:
     runs-on: ubuntu-latest
@@ -66,4 +64,3 @@ jobs:
           SLACK_TITLE: Deployment status of ${{ github.repository }}
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
           SLACK_COLOR: ${{ env.SLACK_COLOR }}
-    

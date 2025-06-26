@@ -1164,8 +1164,10 @@
       "Associated Loan ID": "Associated Loan ID",
       "DP Name": "DP Name",
       "Planned Closure Date": "Planned Closure Date",
-      "Late Fee": "Late Fee",
+      "Outstanding Late Fee": "Outstanding Late Fee",
       "DPD": "DPD",
+      "Remitter Name": "Remitter Name",
+      "Issued Date": "Issued Date",
       "accounting": {
         "ASSET": "ASSET",
         "LIABILITY": "LIABILITY",

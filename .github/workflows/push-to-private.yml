@@ -3,7 +3,7 @@ name: Mirror to Private Repo
 on:
   push:
     branches:
-      - master  # Triggers on merge to master
+      - master # Triggers on merge to master
 
 jobs:
   mirror:
@@ -12,8 +12,8 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Get full history for mirror
-          persist-credentials: false  # Avoid using the default token
+          fetch-depth: 0 # Get full history for mirror
+          persist-credentials: false # Avoid using the default token
 
       - name: Set up Git
         run: |

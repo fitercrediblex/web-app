@@ -72,7 +72,7 @@
     </mat-step>
 
     <mat-step *ngFor="let datatable of datatables">
-      <ng-template matStepLabel>{{ datatable.registeredTableName }}</ng-template>
+      <ng-template matStepLabel>{{ datatable.viewLabel }}</ng-template>
 
       <mifosx-loans-account-datatable-step [datatableData]="datatable" #dtloan></mifosx-loans-account-datatable-step>
     </mat-step>

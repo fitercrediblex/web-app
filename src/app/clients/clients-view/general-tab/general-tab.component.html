@@ -394,11 +394,15 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
-                <span class="detail-value">{{
-                  element.additionalProperties?.isForcedClosure
-                    ? 'Force Closed'
-                    : element.status?.value || element.status?.code || '-'
-                }}</span>
+                <span class="detail-value">
+                  {{
+                    element.additionalProperties?.isRestructured
+                      ? 'Restructured'
+                      : element.additionalProperties?.isForcedClosure
+                        ? 'Force Closed'
+                        : element.status?.value || element.status?.code || '-'
+                  }}
+                </span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Net Disbursed Amount' | translate }}:</span>

@@ -394,7 +394,11 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
-                <span class="detail-value">{{ element.status?.value || element.status?.code || '-' }}</span>
+                <span class="detail-value">{{
+                  element.additionalProperties?.isForcedClosure
+                    ? 'Force Closed'
+                    : element.status?.value || element.status?.code || '-'
+                }}</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Net Disbursed Amount' | translate }}:</span>
@@ -428,12 +432,6 @@
                     }}
                   </ng-container>
                 </span>
-                <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
-                <span class="detail-value">{{
-                  element.additionalProperties?.isForcedClosure
-                    ? 'Force Closed'
-                    : element.status?.value || element.status?.code || '-'
-                }}</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>

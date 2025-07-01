@@ -58,6 +58,7 @@ export class ForeclosureComponent implements OnInit {
       outstandingFeeChargesPortion: [{ value: this.dataObject.feeChargesPortion || 0, disabled: true }],
       outstandingPenaltyChargesPortion: [{ value: this.dataObject.penaltyChargesPortion || 0, disabled: true }],
       transactionAmount: [{ value: this.dataObject.amount, disabled: true }],
+      isForcedClosure: [false],
       note: [
         '',
         Validators.required

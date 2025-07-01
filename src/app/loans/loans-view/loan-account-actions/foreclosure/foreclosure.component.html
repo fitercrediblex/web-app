@@ -46,6 +46,8 @@
             <input matInput required formControlName="transactionAmount" />
           </mat-form-field>
 
+          <mat-checkbox formControlName="isForcedClosure" color="primary"> is forced closure </mat-checkbox>
+
           <mat-form-field>
             <mat-label>{{ 'labels.inputs.Note' | translate }}</mat-label>
             <textarea matInput formControlName="note" cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>

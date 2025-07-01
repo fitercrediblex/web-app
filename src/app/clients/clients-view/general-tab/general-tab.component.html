@@ -241,13 +241,21 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.DP Name' | translate }}:</span>
-                <span class="detail-value">{{ element.dpName || 'N/A' }}</span>
+                <span class="detail-value">{{ element.additionalProperties?.dpName || 'N/A' }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.Planned Closure Date' | translate }}:</span>
+                <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
+                <span class="detail-value">{{ element.status?.value || element.status?.code || '-' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.Net Disbursed Amount' | translate }}:</span>
                 <span class="detail-value">{{
-                  element.timeline.expectedMaturityDate ? (element.timeline.expectedMaturityDate | dateFormat) : '-'
+                  (element.additionalProperties?.netDisbursedAmount | formatNumber) || 'N/A'
                 }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.Remitter Name' | translate }}:</span>
+                <span class="detail-value">{{ element.additionalProperties?.remitterName || 'N/A' }}</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Installment Amount' | translate }}:</span>
@@ -258,18 +266,35 @@
                 }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
-                <span class="detail-value">{{ element.status?.value || element.status?.code || '-' }}</span>
+                <span class="detail-label">{{ 'labels.inputs.Issued Date' | translate }}:</span>
+                <span class="detail-value">
+                  <ng-container *ngIf="element.status.waitingForDisbursal || element.status.pendingApproval">
+                    N/A
+                  </ng-container>
+                  <ng-container *ngIf="!(element.status.waitingForDisbursal || element.status.pendingApproval)">
+                    {{
+                      element.timeline.actualDisbursementDate
+                        ? (element.timeline.actualDisbursementDate | dateFormat)
+                        : '-'
+                    }}
+                  </ng-container>
+                </span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.DPD' | translate }}:</span>
-                <span class="detail-value">{{ element.dpd || '-' }}</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.Late Fee' | translate }}:</span>
+                <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>
                 <span class="detail-value">{{
                   element.additionalProperties?.lateFees ? (element.additionalProperties.lateFees | formatNumber) : '-'
                 }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.Planned Closure Date' | translate }}:</span>
+                <span class="detail-value">{{
+                  element.timeline.expectedMaturityDate ? (element.timeline.expectedMaturityDate | dateFormat) : '-'
+                }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.DPD' | translate }}:</span>
+                <span class="detail-value">{{ element.additionalProperties?.dpd || '-' }}</span>
               </div>
             </div>
           </div>
@@ -365,13 +390,21 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.DP Name' | translate }}:</span>
-                <span class="detail-value">{{ element.dpName || 'N/A' }}</span>
+                <span class="detail-value">{{ element.additionalProperties?.dpName || 'N/A' }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.Planned Closure Date' | translate }}:</span>
+                <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
+                <span class="detail-value">{{ element.status?.value || element.status?.code || '-' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.Net Disbursed Amount' | translate }}:</span>
                 <span class="detail-value">{{
-                  element.timeline.expectedMaturityDate ? (element.timeline.expectedMaturityDate | dateFormat) : '-'
+                  (element.additionalProperties?.netDisbursedAmount | formatNumber) || 'N/A'
                 }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.Remitter Name' | translate }}:</span>
+                <span class="detail-value">{{ element.additionalProperties?.remitterName || 'N/A' }}</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Installment Amount' | translate }}:</span>
@@ -382,6 +415,19 @@
                 }}</span>
               </div>
               <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.Issued Date' | translate }}:</span>
+                <span class="detail-value">
+                  <ng-container *ngIf="element.status.waitingForDisbursal || element.status.pendingApproval">
+                    N/A
+                  </ng-container>
+                  <ng-container *ngIf="!(element.status.waitingForDisbursal || element.status.pendingApproval)">
+                    {{
+                      element.timeline.actualDisbursementDate
+                        ? (element.timeline.actualDisbursementDate | dateFormat)
+                        : '-'
+                    }}
+                  </ng-container>
+                </span>
                 <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
                 <span class="detail-value">{{
                   element.additionalProperties?.isForcedClosure
@@ -390,14 +436,20 @@
                 }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.DPD' | translate }}:</span>
-                <span class="detail-value">{{ element.dpd || '-' }}</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.Late Fee' | translate }}:</span>
+                <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>
                 <span class="detail-value">{{
                   element.additionalProperties?.lateFees ? (element.additionalProperties.lateFees | formatNumber) : '-'
                 }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.Planned Closure Date' | translate }}:</span>
+                <span class="detail-value">{{
+                  element.timeline.expectedMaturityDate ? (element.timeline.expectedMaturityDate | dateFormat) : '-'
+                }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">{{ 'labels.inputs.DPD' | translate }}:</span>
+                <span class="detail-value">{{ element.additionalProperties?.dpd || '-' }}</span>
               </div>
             </div>
           </div>

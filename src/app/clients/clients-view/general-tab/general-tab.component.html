@@ -283,7 +283,9 @@
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>
                 <span class="detail-value">{{
-                  element.additionalProperties?.lateFees ? (element.additionalProperties.lateFees | formatNumber) : '-'
+                  element.additionalProperties?.totalLateFees
+                    ? (element.additionalProperties.totalLateFees | formatNumber)
+                    : '-'
                 }}</span>
               </div>
               <div class="detail-item">
@@ -440,7 +442,9 @@
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>
                 <span class="detail-value">{{
-                  element.additionalProperties?.lateFees ? (element.additionalProperties.lateFees | formatNumber) : '-'
+                  element.additionalProperties?.totalLateFees
+                    ? (element.additionalProperties.totalLateFees | formatNumber)
+                    : '-'
                 }}</span>
               </div>
               <div class="detail-item">

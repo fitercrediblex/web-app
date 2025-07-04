@@ -236,7 +236,7 @@
           <div class="loan-details-expand">
             <div class="details-grid">
               <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.Associated Loan ID' | translate }}:</span>
+                <span class="detail-label">{{ 'labels.inputs.External ID' | translate }}:</span>
                 <span class="detail-value">{{ element.externalId || '-' }}</span>
               </div>
               <div class="detail-item">
@@ -283,7 +283,9 @@
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>
                 <span class="detail-value">{{
-                  element.additionalProperties?.lateFees ? (element.additionalProperties.lateFees | formatNumber) : '-'
+                  element.additionalProperties?.totalLateFees
+                    ? (element.additionalProperties.totalLateFees | formatNumber)
+                    : '-'
                 }}</span>
               </div>
               <div class="detail-item">
@@ -294,7 +296,13 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.DPD' | translate }}:</span>
-                <span class="detail-value">{{ element.additionalProperties?.dpd || '-' }}</span>
+                <span class="detail-value">
+                  {{
+                    element.additionalProperties?.daysPastDue != null && element.additionalProperties?.daysPastDue >= 0
+                      ? element.additionalProperties?.daysPastDue
+                      : '-'
+                  }}
+                </span>
               </div>
             </div>
           </div>
@@ -385,7 +393,7 @@
           <div class="loan-details-expand">
             <div class="details-grid">
               <div class="detail-item">
-                <span class="detail-label">{{ 'labels.inputs.Associated Loan ID' | translate }}:</span>
+                <span class="detail-label">{{ 'labels.inputs.External ID' | translate }}:</span>
                 <span class="detail-value">{{ element.externalId || '-' }}</span>
               </div>
               <div class="detail-item">
@@ -440,7 +448,9 @@
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>
                 <span class="detail-value">{{
-                  element.additionalProperties?.lateFees ? (element.additionalProperties.lateFees | formatNumber) : '-'
+                  element.additionalProperties?.totalLateFees
+                    ? (element.additionalProperties.totalLateFees | formatNumber)
+                    : '-'
                 }}</span>
               </div>
               <div class="detail-item">
@@ -451,7 +461,13 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.DPD' | translate }}:</span>
-                <span class="detail-value">{{ element.additionalProperties?.dpd || '-' }}</span>
+                <span class="detail-value">
+                  {{
+                    element.additionalProperties?.daysPastDue != null && element.additionalProperties?.daysPastDue >= 0
+                      ? element.additionalProperties?.daysPastDue
+                      : '-'
+                  }}
+                </span>
               </div>
             </div>
           </div>

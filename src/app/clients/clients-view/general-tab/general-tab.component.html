@@ -241,7 +241,7 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.DP Name' | translate }}:</span>
-                <span class="detail-value">{{ element.additionalProperties?.dpName || 'N/A' }}</span>
+                <span class="detail-value">{{ element.additionalProperties?.dpName || '-' }}</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
@@ -249,21 +249,31 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Net Disbursed Amount' | translate }}:</span>
-                <span class="detail-value">{{
-                  (element.additionalProperties?.netDisbursedAmount | formatNumber) || 'N/A'
-                }}</span>
+                <span class="detail-value">
+                  {{
+                    element.status?.pendingApproval === true || element.status?.waitingForDisbursal === true
+                      ? 'N/A'
+                      : element.additionalProperties?.netDisbursedAmount != null
+                        ? (element.additionalProperties.netDisbursedAmount | formatNumber)
+                        : '-'
+                  }}
+                </span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Remitter Name' | translate }}:</span>
-                <span class="detail-value">{{ element.additionalProperties?.remitterName || 'N/A' }}</span>
+                <span class="detail-value">{{ element.additionalProperties?.remitterName || '-' }}</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Installment Amount' | translate }}:</span>
-                <span class="detail-value">{{
-                  element.additionalProperties?.effectiveInstallmentAmount
-                    ? (element.additionalProperties.effectiveInstallmentAmount | formatNumber)
-                    : '-'
-                }}</span>
+                <span class="detail-value">
+                  {{
+                    element.status?.pendingApproval || element.status?.waitingForDisbursal
+                      ? 'N/A'
+                      : element.additionalProperties?.effectiveInstallmentAmount != null
+                        ? (element.additionalProperties.effectiveInstallmentAmount | formatNumber)
+                        : '-'
+                  }}
+                </span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Issued Date' | translate }}:</span>
@@ -282,25 +292,38 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Outstanding Late Fee' | translate }}:</span>
-                <span class="detail-value">{{
-                  element.additionalProperties?.totalLateFees
-                    ? (element.additionalProperties.totalLateFees | formatNumber)
-                    : '-'
-                }}</span>
+                <span class="detail-value">
+                  {{
+                    element.status?.pendingApproval || element.status?.waitingForDisbursal
+                      ? 'N/A'
+                      : element.additionalProperties?.totalLateFees != null
+                        ? (element.additionalProperties.totalLateFees | formatNumber)
+                        : '-'
+                  }}
+                </span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Planned Closure Date' | translate }}:</span>
-                <span class="detail-value">{{
-                  element.timeline.expectedMaturityDate ? (element.timeline.expectedMaturityDate | dateFormat) : '-'
-                }}</span>
+                <span class="detail-value">
+                  {{
+                    element.status?.pendingApproval || element.status?.waitingForDisbursal
+                      ? 'N/A'
+                      : element.timeline?.expectedMaturityDate
+                        ? (element.timeline.expectedMaturityDate | dateFormat)
+                        : '-'
+                  }}
+                </span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.DPD' | translate }}:</span>
                 <span class="detail-value">
                   {{
-                    element.additionalProperties?.daysPastDue != null && element.additionalProperties?.daysPastDue >= 0
-                      ? element.additionalProperties?.daysPastDue
-                      : '-'
+                    element.status?.pendingApproval || element.status?.waitingForDisbursal
+                      ? 'N/A'
+                      : element.additionalProperties?.daysPastDue != null &&
+                          element.additionalProperties.daysPastDue >= 0
+                        ? element.additionalProperties.daysPastDue
+                        : '-'
                   }}
                 </span>
               </div>

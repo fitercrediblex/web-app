@@ -94,11 +94,33 @@ export class CreateLoansAccountComponent {
     this.setDatatables();
   }
 
+  convertSnakeToPascalCase(snakeCase: string): string {
+    return snakeCase
+      .split('_')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  transformDatatableLabel(datatable: any): string {
+    const separator = '_';
+    // format: dt_loan_data_table_name
+    const [
+      dt,
+      entityName,
+      ...actualTableNameParts
+    ] = datatable.registeredTableName.split(separator);
+
+    // transform snake case "actualTableName" to pascal case
+    const tableName = actualTableNameParts.join(separator);
+    return this.convertSnakeToPascalCase(tableName);
+  }
+
   setDatatables(): void {
     this.datatables = [];
 
     if (this.loansAccountProductTemplate.datatables) {
       this.loansAccountProductTemplate.datatables.forEach((datatable: any) => {
+        datatable.viewLabel = this.transformDatatableLabel(datatable);
         this.datatables.push(datatable);
       });
     }

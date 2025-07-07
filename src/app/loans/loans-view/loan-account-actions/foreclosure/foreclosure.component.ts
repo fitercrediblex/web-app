@@ -45,6 +45,7 @@ export class ForeclosureComponent implements OnInit {
     this.maxDate = this.settingsService.businessDate;
     this.createforeclosureForm();
     this.onChanges();
+    this.setupMutualExclusion(); // 👈 Added here
   }
 
   createforeclosureForm() {
@@ -58,6 +59,8 @@ export class ForeclosureComponent implements OnInit {
       outstandingFeeChargesPortion: [{ value: this.dataObject.feeChargesPortion || 0, disabled: true }],
       outstandingPenaltyChargesPortion: [{ value: this.dataObject.penaltyChargesPortion || 0, disabled: true }],
       transactionAmount: [{ value: this.dataObject.amount, disabled: true }],
+      isForcedClosure: [false],
+      isRestructured: [false],
       note: [
         '',
         Validators.required
@@ -106,8 +109,25 @@ export class ForeclosureComponent implements OnInit {
       locale
     };
 
-    this.loanService.loanForclosureData(this.loanId, data).subscribe((response: any) => {
+    this.loanService.loanForclosureData(this.loanId, data).subscribe(() => {
       this.router.navigate([`../../general`], { relativeTo: this.route });
+    });
+  }
+
+  private setupMutualExclusion(): void {
+    const forcedControl = this.foreclosureForm.get('isForcedClosure');
+    const restructuredControl = this.foreclosureForm.get('isRestructured');
+
+    forcedControl.valueChanges.subscribe((isForced) => {
+      if (isForced && restructuredControl.value) {
+        restructuredControl.setValue(false, { emitEvent: false });
+      }
+    });
+
+    restructuredControl.valueChanges.subscribe((isRestructured) => {
+      if (isRestructured && forcedControl.value) {
+        forcedControl.setValue(false, { emitEvent: false });
+      }
     });
   }
 }

@@ -18,7 +18,7 @@ import { of } from 'rxjs';
 })
 export class ManageTaxGroupsComponent implements OnInit {
   /** Tax Groups data. */
-  taxGroupsData: any;
+  taxGroupsData: any[] = [];
   /** Columns to be displayed in tax groups table. */
   displayedColumns: string[] = ['name'];
   /** Data source for tax groups table. */
@@ -34,7 +34,7 @@ export class ManageTaxGroupsComponent implements OnInit {
    * @param {ActivatedRoute} route Activated Route.
    */
   constructor(private route: ActivatedRoute) {
-    this.route.data.subscribe((data: { taxGroups: any }) => {
+    this.route.data.subscribe((data: { taxGroups: any[] }) => {
       this.taxGroupsData = data.taxGroups;
     });
   }
@@ -56,9 +56,16 @@ export class ManageTaxGroupsComponent implements OnInit {
 
   /**
    * Initializes the data source, paginator and sorter for tax groups table.
+   * Transforms data to ensure each row has a 'name' property.
    */
   setTaxGroups() {
-    this.dataSource = new MatTableDataSource(this.taxGroupsData);
+    // Transform each group to add a 'name' property for the table
+    const transformed = (this.taxGroupsData || []).map((group) => ({
+      ...group,
+      id: group.id,
+      name: group.name || ''
+    }));
+    this.dataSource = new MatTableDataSource(transformed);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

@@ -99,6 +99,27 @@ export class CreateClientComponent {
     return areValids;
   }
 
+  convertSnakeToPascalCase(snakeCase: string): string {
+    return snakeCase
+      .split('_')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  transformDatatableLabel(datatable: any): string {
+    const separator = '_';
+    // format: dt_client_data_table_name
+    const [
+      dt,
+      entityName,
+      ...actualTableNameParts
+    ] = datatable.registeredTableName.split(separator);
+
+    // transform snake case "actualTableName" to pascal case
+    const tableName = actualTableNameParts.join(separator);
+    return this.convertSnakeToPascalCase(tableName);
+  }
+
   setDatatables(): void {
     this.datatables = [];
     let legalFormTypeVal = 'person';
@@ -108,6 +129,7 @@ export class CreateClientComponent {
     if (this.clientTemplate.datatables) {
       this.clientTemplate.datatables.forEach((datatable: any) => {
         if (datatable.entitySubType.toLowerCase() === legalFormTypeVal) {
+          datatable.viewLabel = this.transformDatatableLabel(datatable);
           this.datatables.push(datatable);
         }
       });

@@ -245,7 +245,10 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
-                <span class="detail-value">{{ element.status?.value || element.status?.code || '-' }}</span>
+                <span class="detail-value">{{
+                  (element.status?.value || element.status?.code || '-') +
+                    (element.inArrears ? ' - Arrears' : ' - Good standing')
+                }}</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">{{ 'labels.inputs.Net Disbursed Amount' | translate }}:</span>

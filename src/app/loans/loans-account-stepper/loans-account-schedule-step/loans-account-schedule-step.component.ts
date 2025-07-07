@@ -43,6 +43,10 @@ export class LoansAccountScheduleStepComponent {
     );
     delete payload['enableInstallmentLevelDelinquency'];
 
+    if (this.loanId) {
+      payload.accountNo = this.loansAccountTemplate.accountNo;
+    }
+
     this.loansService.calculateLoanSchedule(payload).subscribe((response: any) => {
       this.repaymentScheduleDetails = response;
     });

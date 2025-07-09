@@ -9,20 +9,27 @@ export class DateFormatPipe implements PipeTransform {
   constructor(private settingsService: SettingsService) {}
 
   transform(value: any, dateFormat?: string): any {
-    const defaultDateFormat = this.settingsService.dateFormat.replace('dd', 'DD');
-    if (typeof value === 'undefined') {
+    const defaultDateFormat = this.settingsService.dateFormat.replace('dd', 'DD').replace('yyyy', 'YYYY');
+
+    if (typeof value === 'undefined' || value === null) {
       return '';
     }
-    let dateVal;
+
     moment.locale(this.settingsService.language.code);
-    if (value instanceof Array) {
+
+    let dateVal;
+    if (Array.isArray(value)) {
       dateVal = moment(value.join('-'), 'YYYY-MM-DD');
+    } else if (typeof value === 'number') {
+      dateVal = moment(value * 1000);
     } else {
       dateVal = moment(value);
     }
-    if (dateFormat == null) {
-      return dateVal.format(defaultDateFormat);
+
+    if (!dateVal.isValid()) {
+      return '';
     }
-    return dateVal.format(dateFormat);
+
+    return dateVal.format(dateFormat || defaultDateFormat);
   }
 }

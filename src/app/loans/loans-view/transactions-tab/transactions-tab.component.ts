@@ -90,9 +90,13 @@ export class TransactionsTabComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hideAccrualsParam = new UntypedFormControl(false);
+    this.hideAccrualsParam = new UntypedFormControl(true);
     this.hideReversedParam = new UntypedFormControl(false);
-    this.setLoanTransactions();
+    if (this.hideAccrualsParam.value) {
+      this.filterTransactions(this.hideReversedParam.value, this.hideAccrualsParam.value);
+    } else {
+      this.setLoanTransactions();
+    }
   }
 
   setLoanTransactions() {

@@ -61,95 +61,56 @@
 <div class="container">
   <mat-card>
     <mat-card-content>
-      <div fxLayout="row wrap" class="content">
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="2%" fxLayout.lt-md="column">
+        <button type="button" mat-raised-button color="primary" [routerLink]="['../']">
+          {{ 'labels.buttons.Back' | translate }}
+        </button>
+      </div>
+      <div fxLayout="column" class="content">
         <div fxFlex="100%" [ngClass]="loanChargeColor()"></div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.name' | translate }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.name }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.name' | translate }}</div>
         </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.name }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.penalty ? 'Penalty' : 'Fees' }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Charge Type' | translate }}</div>
         </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Charge Type' | translate }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.currency.displayLabel }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Currency' | translate }}</div>
         </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.penalty ? 'Penalty' : 'Fees' }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.chargeTimeType.value }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Payment due at' | translate }}</div>
         </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Currency' | translate }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.dueDate | dateFormat }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Payment due as of' | translate }}</div>
         </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.currency.displayLabel }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.chargeCalculationType.value }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Calculation Type' | translate }}</div>
         </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Payment due at' | translate }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.amount | formatNumber }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Due' | translate }}</div>
         </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.chargeTimeType.value }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.amountPaid | formatNumber }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Paid' | translate }}</div>
         </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Payment due as of' | translate }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.amountWaived | formatNumber }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Waived' | translate }}</div>
         </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.dueDate | dateFormat }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.amountOutstanding | formatNumber }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Outstanding' | translate }}</div>
         </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Calculation Type' | translate }}
-        </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.chargeCalculationType.value }}
-        </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Due' | translate }}
-        </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.amount | formatNumber }}
-        </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Paid' | translate }}
-        </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.amountPaid | formatNumber }}
-        </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Waived' | translate }}
-        </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.amountWaived | formatNumber }}
-        </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Outstanding' | translate }}
-        </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.amountOutstanding | formatNumber }}
-        </div>
-
-        <div fxFlex="50%" class="mat-body-strong">
-          {{ 'labels.inputs.Submitted On Date' | translate }}
-        </div>
-
-        <div fxFlex="50%">
-          {{ chargeData.submittedOnDate | dateFormat }}
+        <div fxLayout="row" class="table-row">
+          <div fxFlex="60">{{ chargeData.submittedOnDate | dateFormat }}</div>
+          <div fxFlex="40" class="mat-body-strong">{{ 'labels.inputs.Submitted On Date' | translate }}</div>
         </div>
       </div>
 

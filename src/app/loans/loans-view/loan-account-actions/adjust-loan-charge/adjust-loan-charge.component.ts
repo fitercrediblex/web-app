@@ -60,7 +60,6 @@ export class AdjustLoanChargeComponent implements OnInit {
     this.maxDate = this.settingsService.maxAllowedDate;
     this.createAdjustLoanChargeForm();
     this.setRepaymentLoanDetails();
-    console.log('Charge Data:', this.chargeData);
   }
 
   /**

@@ -68,7 +68,7 @@ export class AdjustLoanChargeComponent implements OnInit {
   createAdjustLoanChargeForm() {
     this.adjustLoanChargeForm = this.formBuilder.group({
       amount: [
-        this.chargeData.amount,
+        this.chargeData.amountOutstanding,
         Validators.required
       ],
       externalId: '',

@@ -247,7 +247,7 @@
                 <span class="detail-label">{{ 'labels.inputs.Loan Status' | translate }}:</span>
                 <span class="detail-value">{{
                   (element.status?.value || element.status?.code || '-') +
-                    (element.inArrears ? ' - Arrears' : ' - Good standing')
+                    (element.status?.active ? (element.inArrears ? ' - Arrears' : ' - Good standing') : '')
                 }}</span>
               </div>
               <div class="detail-item">

@@ -29,7 +29,9 @@
     <ng-container matColumnDef="paiddate">
       <th mat-header-cell class="center" *matHeaderCellDef>{{ 'labels.inputs.Paid Date' | translate }}</th>
       <td mat-cell class="center" *matCellDef="let item" [ngClass]="installmentStyle(item)">
-        {{ item.obligationsMetOnDate | dateFormat }}
+        <ng-container *ngIf="!(item.interestOriginalDue === 0 && item.principalDue === 0)">
+          {{ item.obligationsMetOnDate | dateFormat }}
+        </ng-container>
       </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
@@ -37,15 +39,22 @@
     <ng-container matColumnDef="check">
       <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
       <td mat-cell class="center" *matCellDef="let item" [ngClass]="installmentStyle(item)">
-        <span *ngIf="item.obligationsMetOnDate"> <i class="fa fa-check"></i> </span>
+        <span *ngIf="item.obligationsMetOnDate && !(item.interestOriginalDue === 0 && item.principalDue === 0)">
+          <i class="fa fa-check"></i>
+        </span>
       </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <th mat-header-cell class="center" *matHeaderCellDef>{{ 'labels.inputs.Status' | translate }}</th>
-      <td mat-cell class="center" *matCellDef="let item" [ngClass]="installmentStyle(item)">
-        {{ item.status }}
+      <td mat-cell class="center status" *matCellDef="let item" [ngClass]="installmentStyle(item)">
+        <ng-container *ngIf="item.interestOriginalDue === 0 && item.principalDue === 0; else normalStatus">
+          GRACE_PERIOD_APPLIED
+        </ng-container>
+        <ng-template #normalStatus>
+          {{ item.status }}
+        </ng-template>
       </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>

@@ -2626,7 +2626,9 @@
       "Submitted and pending approval": "Submitted and pending approval",
       "Transfer in progress": "Transfer in progress",
       "Transfer on hold": "Transfer on hold",
-      "Withdrawn": "Withdrawn"
+      "Withdrawn": "Withdrawn",
+      "Forced Closure": "Forced Closure",
+      "Restructured": "Restructured"
     },
     "dialogContext": {
       "Are you sure you want Unassign Staff": "Are you sure you want Unassign Staff",

@@ -20,5 +20,44 @@
     .select-row:hover {
       cursor: pointer;
     }
+
+    // Ensure proper table alignment
+    .mat-header-cell,
+    .mat-cell {
+      padding: 8px 8px 8px 0;
+      text-align: left;
+    }
+
+    // Ensure consistent column widths
+    .mat-column-name {
+      min-width: 120px;
+    }
+
+    .mat-column-feepenalty {
+      min-width: 80px;
+    }
+
+    .mat-column-paymentdueat {
+      min-width: 120px;
+    }
+
+    .mat-column-dueDate {
+      min-width: 100px;
+    }
+
+    .mat-column-calculationtype {
+      min-width: 120px;
+    }
+
+    .mat-column-due,
+    .mat-column-paid,
+    .mat-column-waived,
+    .mat-column-outstanding {
+      min-width: 100px;
+    }
+
+    .mat-column-actions {
+      min-width: 120px;
+    }
   }
 }

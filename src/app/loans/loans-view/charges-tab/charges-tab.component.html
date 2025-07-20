@@ -24,11 +24,11 @@
     </ng-container>
 
     <ng-container matColumnDef="dueDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [hide]="useDueDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="!useDueDate">
         <span *ngIf="useDueDate"> {{ 'labels.inputs.Due As Of' | translate }} </span>
         <span *ngIf="!useDueDate"> {{ 'labels.inputs.Submitted On' | translate }} </span>
       </th>
-      <td mat-cell *matCellDef="let charge">
+      <td mat-cell *matCellDef="let charge" [hidden]="!useDueDate">
         <span *ngIf="useDueDate">{{ charge.dueDate | dateFormat }}</span>
         <span *ngIf="!useDueDate">{{ charge.submittedOnDate | dateFormat }}</span>
       </td>
@@ -40,42 +40,42 @@
     </ng-container>
 
     <ng-container matColumnDef="due">
-      <th mat-header-cell class="r-amount" *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Due' | translate }}</th>
-      <td mat-cell class="r-amount" *matCellDef="let charge">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Due' | translate }}</th>
+      <td mat-cell *matCellDef="let charge">
         {{ charge.amount | currency: charge.currency.code : 'symbol-narrow' : '1.2-2' }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="paid">
-      <th mat-header-cell class="r-amount" *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Paid' | translate }}</th>
-      <td mat-cell class="r-amount" *matCellDef="let charge">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'labels.inputs.Paid' | translate }}</th>
+      <td mat-cell *matCellDef="let charge">
         {{ charge.amountPaid | currency: charge.currency.code : 'symbol-narrow' : '1.2-2' }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="waived">
-      <th mat-header-cell class="r-amount" *matHeaderCellDef mat-sort-header>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'labels.inputs.Waived' | translate }}
       </th>
-      <td mat-cell class="r-amount" *matCellDef="let charge">
+      <td mat-cell *matCellDef="let charge">
         {{ charge.amountWaived | currency: charge.currency.code : 'symbol-narrow' : '1.2-2' }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="outstanding">
-      <th mat-header-cell class="r-amount" *matHeaderCellDef mat-sort-header>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'labels.inputs.Outstanding' | translate }}
       </th>
-      <td mat-cell class="r-amount" *matCellDef="let charge">
+      <td mat-cell *matCellDef="let charge">
         {{ charge.amountOutstanding | currency: charge.currency.code : 'symbol-narrow' : '1.2-2' }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell class="r-amount" *matHeaderCellDef mat-sort-header>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'labels.inputs.Actions' | translate }}
       </th>
-      <td mat-cell class="center" *matCellDef="let charge">
+      <td mat-cell *matCellDef="let charge">
         <span *ngIf="status === 'Submitted and pending approval'">
           <button
             class="account-action-button"

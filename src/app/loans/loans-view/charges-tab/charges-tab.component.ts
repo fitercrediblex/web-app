@@ -164,9 +164,7 @@ export class ChargesTabComponent implements OnInit {
     const waiveChargeDialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         heading: this.translateService.instant('labels.heading.Waive Charge'),
-        dialogContext:
-          this.translateService.instant('labels.dialogContext.Are you sure you want to waive charge with id') +
-          `${chargeId} ?`,
+        dialogContext: `${this.translateService.instant('labels.dialogContext.Are you sure you want to waive charge with id:')} ${chargeId}`,
         type: 'Basic'
       }
     });
